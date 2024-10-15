@@ -6,23 +6,55 @@
   <link rel="icon" type="image/svg+xml" href="/favicon.png" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Loopstudios</title>
-  <link rel="stylesheet" href="style.css">
-  <script src="/nav.js" defer></script>
+  <link rel="preload" href="style.css" as="style" onload="this.rel='stylesheet'">
+  <!-- <script type="module" src="/nav.js" defer></script> -->
+  <script type="module" src="/creations.js" defer></script>
 </head>
 
 <body>
-  <header class="bg-hero_mobile">
-    <div>
-      <img src="/logo.svg" alt="logo">
-      <nav>
-        <ul id="nav-list" class="flex"></ul>
-      </nav>
-    </div>
+  <header class="bg-hero_mobile bg-cover">
+    <div class="flex flex-col max-w-7xl mx-auto gap-10 px-4 py-12">
+      <div class="flex items-center justify-between">
+        <img src="/logo.svg" alt="logo" class="">
+        <nav>
+          <ul id="desktop-nav-list" class="flex gap-4"></ul>
+        </nav>
+      </div>
 
-    <div>
-      <h1 class="uppercase">Immersive experiences that deliver</h1>
+      <div class="border border-white">
+        <h1 class="text-white uppercase font-josefin font-extralight md:text-7xl md:w-1/2 px-10 py-12">
+          Immersive
+          experiences that
+          deliver
+        </h1>
+      </div>
     </div>
   </header>
+
+  <main>
+    <section class="py-28">
+      <div class="flex">
+        <div>
+          <img src="/mobile/image-interactive.jpg" alt="interactive">
+        </div>
+        <div>
+          <h2 class="uppercase">the leader in interactive vr</h2>
+          <p>Founded in 2011, Loopstudios has been producing world-class virtual reality projects for some of the best
+            companies around the globe. Our award-winning creations have transformed businesses through digital
+            experiences that bind to their brand.</p>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <div class="flex flex-col items-center">
+        <h2 class="uppercase">our creations</h2>
+        <div id="creations" class="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-4"></div>
+        <button class="bg-black text-white px-8 py-3 rounded-full">SEE ALL</button>
+      </div>
+    </section>
+
+  </main>
 </body>
 
 </html>
