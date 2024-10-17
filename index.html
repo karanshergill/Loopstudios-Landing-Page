@@ -12,17 +12,46 @@
 
 <body x-data="alpineData" class="h-full">
   <header class="bg-hero_mobile md:bg-hero-desktop bg-cover">
-    <div class="flex flex-col max-w-5xl mx-auto gap-20 pt-14 pb-24">
+    <div class="flex flex-col max-w-5xl mx-auto gap-20 pt-8 px-6 md:pt-14 md:pb-24">
       <div class="flex items-center justify-between">
-        <img src="/logo.svg" alt="logo" class="md:w-36">
-        <nav>
+        <img src="/logo.svg" alt="logo" class="w-32 md:w-36">
+
+        <!-- open mobile navigation -->
+        <button @click="isMobileMenuOpen = !isMobileMenuOpen" class="block md:hidden focus:outline-none">
+          <span x-show="!isMobileMenuOpen">
+            <box-icon name='menu' color="white"></box-icon>
+          </span>
+        </button>
+
+        <nav class="hidden md:block">
           <ul id="desktop-nav-list" class="flex gap-6">
             <template x-for="item in navItems" :key="item.label">
               <li>
                 <a x-bind:href="item.link" class="group relative text-white font-josefin inline-block">
                   <span x-text="item.label"></span>
                   <span
-                    class="absolute left-0 bottom-0 w-0 h-[2px] bg-white transition-all duration-300 group-hover:w-full"></span>
+                    class="absolute left-0 -bottom-1 w-0 h-[2px] bg-white transition-all duration-300 group-hover:w-full"></span>
+                </a>
+              </li>
+            </template>
+          </ul>
+        </nav>
+      </div>
+
+      <div x-show="isMobileMenuOpen"
+        class="absolute inset-0 z-50 bg-black text-white flex flex-col justify-center md:hidden transition duration-300">
+        <button @click="isMobileMenuOpen = false" class="absolute top-6 right-6 focus:outline-none">
+          <!-- close menu -->
+          <span x-show="isMobileMenuOpen">
+            <box-icon name='x' color="white"></box-icon>
+          </span>
+        </button>
+        <nav>
+          <ul class="flex flex-col gap-6 text-2xl">
+            <template x-for="item in navItems" :key="item.label">
+              <li>
+                <a x-bind:href="item.link" class="font-josefin uppercase hover:text-gray-300 transition duration-300">
+                  <span x-text="item.label"></span>
                 </a>
               </li>
             </template>
@@ -31,19 +60,30 @@
       </div>
 
       <h1
-        class="text-white uppercase font-josefin font-light border border-white md:leading-[4.5rem] md:text-6xl md:w-[550px] px-10 pt-10 pb-6">
+        class="text-white uppercase font-josefin font-light border border-white md:leading-[4.5rem] text-4xl px-8 pt-8 pb-6 mx-2 md:text-6xl md:w-[550px] md:px-10 md:pt-10">
         immersive experiences that deliver
       </h1>
     </div>
   </header>
 
   <main>
-    <section class="max-w-5xl py-28 mx-auto">
-      <div class="relative flex">
+    <!-- hero -->
+    <section class="max-w-5xl mx-auto py-24 md:py-28">
+      <div class="flex flex-col px-6 md:relative md:flex-row md:px-0">
         <img src="/mobile/image-interactive.jpg" alt="interactive">
-        <div class="absolute flex flex-col gap-6 bg-white w-1/2 pt-20 pb-0 px-[3.25rem] bottom-0 left-[500px]">
-          <h2 class="uppercase font-josefin font-light text-4xl leading-9">the leader in interactive vr</h2>
-          <p class="font-alata text-dark-gray text-sm leading-relaxed">Founded in 2011, Loopstudios has been producing
+        <div
+          class="flex flex-col gap-4 bg-white pt-12 pb-0 md:absolute md:gap-6 md:w-1/2 md:pt-20 md:px-[3.25rem] md:bottom-0 md:left-[500px]">
+          <h2
+            class="uppercase font-josefin font-light text-3xl text-black leading-9 text-center md:text-4xl md:text-left">
+            the
+            leader in
+            interactive
+            vr</h2>
+          <p class="font-alata text-dark-gray text-sm leading-relaxed text-center px-8 md:px-0 md:text-left">Founded
+            in
+            2011,
+            Loopstudios has been
+            producing
             world-class
             virtual
             reality projects for
@@ -54,14 +94,15 @@
       </div>
     </section>
 
-    <section class="max-w-5xl mx-auto pb-20">
-      <div class="flex justify-between py-14">
-        <h2 class="uppercase font-josefin font-light text-4xl">Our Creations</h2>
+    <!-- gallery -->
+    <section class="max-w-5xl mx-auto pb-32">
+      <div class="flex justify-between pb-12">
+        <h2 class="uppercase font-josefin font-light text-4xl text-black mx-auto md:mx-0">Our Creations</h2>
         <button
-          class="uppercase font-alata text-sm tracking-[0.3em] border-2 border-black px-6 hover:bg-black hover:text-white hover:shadow-dark-gray hover:shadow-md duration-500">See
+          class="hidden md:block uppercase font-alata text-sm tracking-[0.3em] border-2 border-black px-6 hover:bg-black hover:text-white hover:shadow-dark-gray hover:shadow-md duration-500">See
           All</button>
       </div>
-      <div id="creations" class="grid grid-cols-1 md:grid-cols-4 gap-6">
+      <div id="creations" class="grid grid-cols-1 md:grid-cols-4 gap-6 px-6 md:px-0">
         <template x-for="item in creationItems" :key="item.label">
           <!-- Correct rendering of each item -->
           <div class="relative group cursor-pointer">
@@ -71,7 +112,7 @@
               <img :src="item['image-small']" alt="" class="">
             </picture>
             <div
-              class="absolute inset-0 bg-white bg-opacity-70 opacity-0 group-hover:opacity-100 transition-opacity duration-500">
+              class="absolute inset-0 bg-black bg-opacity-40 group-hover:bg-white group-hover:bg-opacity-70 transition-colors duration-500">
             </div>
             <h2 x-text="item.label"
               class="absolute bottom-5 left-7 uppercase text-white mr-8 group-hover:text-black text-3xl font-light font-josefin duration-500">
@@ -83,7 +124,8 @@
   </main>
 
   <footer class="bg-black">
-    <div class="flex max-w-5xl mx-auto py-8">
+    <!-- logo and navigation -->
+    <div class="flex max-w-5xl mx-auto py-8 justify-between">
       <div class="flex flex-col gap-6">
         <img src="/logo.svg" alt="logo" class="md:w-28">
         <nav>
@@ -93,18 +135,43 @@
                 <a x-bind:href="item.link" class="group relative text-white font-josefin text-sm inline-block">
                   <span x-text="item.label"></span>
                   <span
-                    class="absolute left-1/2 transform -translate-x-1/2 -bottom-1 w-6 h-[2px] bg-white opacity-0 transition-opacity duration-300 group-hover:opacity-100"></span>
+                    class="absolute left-1/2 transform -translate-x-1/2 -bottom-1 w-6 h-[2px] bg-white opacity-0 transition-opacity duration-300 group-hover:opacity-100">
+                  </span>
                 </a>
               </li>
             </template>
           </ul>
         </nav>
       </div>
-      <div>
-        <!-- icons -->
-      </div>
-      <div>
-        <!-- copyright -->
+
+      <!-- social icons and copyright -->
+      <div class="flex flex-col gap-4">
+        <div class="flex justify-end gap-2">
+          <div class="group relative inline-block cursor-pointer">
+            <box-icon type='logo' name='facebook-square' color='white'></box-icon>
+            <span
+              class="absolute bottom-0 left-1/2 transform -translate-x-1/2 w-4 h-[2px] bg-white opacity-0 transition-opacity duration-300 group-hover:opacity-100"></span>
+          </div>
+          <div class="group relative inline-block cursor-pointer">
+            <box-icon type='logo' name='twitter' color='white'></box-icon>
+            <span
+              class="absolute bottom-0 left-1/2 transform -translate-x-1/2 w-4 h-[2px] bg-white opacity-0 transition-opacity duration-300 group-hover:opacity-100"></span>
+          </div>
+          <div class="group relative inline-block cursor-pointer">
+            <box-icon type='logo' name='pinterest' color='white'></box-icon>
+            <span
+              class="absolute bottom-0 left-1/2 transform -translate-x-1/2 w-4 h-[2px] bg-white opacity-0 transition-opacity duration-300 group-hover:opacity-100"></span>
+          </div>
+          <div class="group relative inline-block cursor-pointer">
+            <box-icon type='logo' name='instagram' color='white'></box-icon>
+            <span
+              class="absolute bottom-0 left-1/2 transform -translate-x-1/2 w-4 h-[2px] bg-white opacity-0 transition-opacity duration-300 group-hover:opacity-100"></span>
+          </div>
+        </div>
+        <small class="text-dark-gray">
+          &copy; <span x-data="{ year: new Date().getFullYear() }" x-text="year"></span>
+          Loopstudios. All rights reserved.
+        </small>
       </div>
     </div>
   </footer>
