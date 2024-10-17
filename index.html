@@ -19,7 +19,7 @@
         <!-- open mobile navigation -->
         <button @click="isMobileMenuOpen = !isMobileMenuOpen" class="block md:hidden focus:outline-none">
           <span x-show="!isMobileMenuOpen">
-            <box-icon name='menu' color="white"></box-icon>
+            <box-icon name='menu' color="white" size="md"></box-icon>
           </span>
         </button>
 
@@ -40,17 +40,23 @@
 
       <div x-show="isMobileMenuOpen"
         class="absolute inset-0 z-50 bg-black text-white flex flex-col justify-center md:hidden transition duration-300">
-        <button @click="isMobileMenuOpen = false" class="absolute top-6 right-6 focus:outline-none">
-          <!-- close menu -->
-          <span x-show="isMobileMenuOpen">
-            <box-icon name='x' color="white"></box-icon>
-          </span>
-        </button>
+
+        <div class="absolute flex items-center justify-between top-8 left-8 right-8">
+          <img src="/logo.svg" alt="logo" class="w-40">
+          <button @click="isMobileMenuOpen = false" class="focus:outline-none">
+            <!-- close menu -->
+            <span x-show="isMobileMenuOpen">
+              <box-icon name='x' color="white" size="md"></box-icon>
+            </span>
+          </button>
+        </div>
+
         <nav>
-          <ul class="flex flex-col gap-6 text-2xl">
+          <ul class="flex flex-col gap-6 text-3xl p-8">
             <template x-for="item in navItems" :key="item.label">
               <li>
-                <a x-bind:href="item.link" class="font-josefin uppercase hover:text-gray-300 transition duration-300">
+                <a x-bind:href="item.link"
+                  class="font-josefin font-light uppercase hover:text-gray-300 transition duration-300">
                   <span x-text="item.label"></span>
                 </a>
               </li>
@@ -60,7 +66,7 @@
       </div>
 
       <h1
-        class="text-white uppercase font-josefin font-light border border-white md:leading-[4.5rem] text-4xl px-8 pt-8 pb-6 mx-2 md:text-6xl md:w-[550px] md:px-10 md:pt-10">
+        class="text-white uppercase font-josefin font-light border border-white md:leading-[4.5rem] text-4xl px-8 pt-8 pb-6 mt-20 mb-60 mx-2 md:my-0 md:text-6xl md:w-[550px] md:px-10 md:pt-10">
         immersive experiences that deliver
       </h1>
     </div>
@@ -96,8 +102,8 @@
 
     <!-- gallery -->
     <section class="max-w-5xl mx-auto pb-32">
-      <div class="flex justify-between pb-12">
-        <h2 class="uppercase font-josefin font-light text-4xl text-black mx-auto md:mx-0">Our Creations</h2>
+      <div class="flex justify-between pb-10 md:pb-12">
+        <h2 class="uppercase font-josefin font-light text-3xl text-black mx-auto md:text-4xl md:mx-0">Our Creations</h2>
         <button
           class="hidden md:block uppercase font-alata text-sm tracking-[0.3em] border-2 border-black px-6 hover:bg-black hover:text-white hover:shadow-dark-gray hover:shadow-md duration-500">See
           All</button>
@@ -115,21 +121,25 @@
               class="absolute inset-0 bg-black bg-opacity-40 group-hover:bg-white group-hover:bg-opacity-70 transition-colors duration-500">
             </div>
             <h2 x-text="item.label"
-              class="absolute bottom-5 left-7 uppercase text-white mr-8 group-hover:text-black text-3xl font-light font-josefin duration-500">
+              class="absolute bottom-3 left-5 uppercase text-white mr-40 md:bottom-5 md:left-7 md:mr-8 md:text-3xl group-hover:text-black text-2xl font-light font-josefin duration-500">
             </h2>
           </div>
         </template>
+        <button
+          class="md:hidden mx-auto uppercase font-alata text-sm tracking-[0.3em] border-2 border-black px-8 py-2 mt-4 hover:bg-black hover:text-white hover:shadow-dark-gray hover:shadow-md duration-500">See
+          All</button>
+      </div>
       </div>
     </section>
   </main>
 
   <footer class="bg-black">
     <!-- logo and navigation -->
-    <div class="flex max-w-5xl mx-auto py-8 justify-between">
-      <div class="flex flex-col gap-6">
-        <img src="/logo.svg" alt="logo" class="md:w-28">
+    <div class="flex flex-col max-w-5xl mx-auto py-8 justify-between gap-6 md:flex-row md:gap-0">
+      <div class="flex flex-col gap-6 mx-auto md:mx-0">
+        <img src="/logo.svg" alt="logo" class="w-32 md:w-28">
         <nav>
-          <ul id="desktop-nav-list" class="flex gap-6">
+          <ul id="desktop-nav-list" class="flex flex-col items-center gap-3 md:items-start md:flex-row md:gap-6">
             <template x-for="item in navItems" :key="item.label">
               <li>
                 <a x-bind:href="item.link" class="group relative text-white font-josefin text-sm inline-block">
@@ -145,8 +155,8 @@
       </div>
 
       <!-- social icons and copyright -->
-      <div class="flex flex-col gap-4">
-        <div class="flex justify-end gap-2">
+      <div class="flex flex-col gap-2 mx-auto md:gap-4 md:mx-0">
+        <div class="flex gap-2 justify-center md:justify-end">
           <div class="group relative inline-block cursor-pointer">
             <box-icon type='logo' name='facebook-square' color='white'></box-icon>
             <span
